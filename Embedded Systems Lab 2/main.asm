@@ -19,33 +19,36 @@
 .equ digit_9 = 0x6F ; pattern to display digit 9
 
 .def value = r20 
-.def tens = r21
-.def ones = r22
+.def tens = r24
+.def ones = r25
 .def temp = r18
 ;.def count = R20 ; counter 
 
 ; Set push button (PB3) as input
-cbi DDRB, 3
-
 ; Set SER (PB0), RCLK (PB1), and SRCLK (PB2) as outputs
-sbi DDRB, 0
-sbi DDRB, 1
-sbi DDRB, 2
+cbi PORTB, PB4
+nop
+ldi r16, 0
+ldi r16, (1<<DDB0) | (1<<DDB1) | (1<<DDB2)
+out DDRB, r16
+nop
 ldi value, 0x00
 ; Main loop
 reset: 
 	ldi r16, digit_0
 	rcall display
 	rcall display
-	; Put code here to generate RCLK pulse
+			; Put code here to generate RCLK pulse
 	sbi PORTB, PB1 ; set PB1 (RCLK)
 	cbi PORTB, PB1 ; clear PB1 (RCLK)
-
+	nop
 main:
 	; Read push button state
+	nop
+	nop
 	in R17, PINB
-	sbrc R17, 3 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
-	rcall rightbuttonpressed
+	sbrs R17, PB4 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
+	rjmp rightbuttonpressed
 	rjmp main ; if push button is not pressed, wait
 
 
@@ -53,52 +56,47 @@ main:
 ; TODO: etermine how long the button has been pressed to trigger a reset
 rightbuttonpressed:
 	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-	rcall delay
-
 	in R17, PINB
-	sbrc R17, 3
-	rcall buttonReleased
+	sbrc R17, 4
+	rjmp buttonReleased
 	rjmp main
 	
-	
-
 buttonReleased:
 	inc value 
+	nop
+	rcall delay
+	cpi value, 10
+	brlt displayOne
 	rcall findValue ; find the tens and ones place
-
-	displayTens: 
-		ldi tens, 0
+	displayDouble: 
 		mov temp, tens
 		rcall lookup
-	displayOnes:
-		ldi ones, 3
+		rcall display
+		nop
 		mov temp, ones
+		call lookup
+		rcall display
+		rjmp displayDone
+	displayOne:
+		ldi temp, 0
+		nop
 		rcall lookup
-	; Put code here to generate RCLK pulse
+		rcall display
+		mov temp, value
+		rcall lookup
+		rcall display
+	displayDone: 
+			; Put code here to generate RCLK pulse
 	sbi PORTB, PB1 ; set PB1 (RCLK)
 	cbi PORTB, PB1 ; clear PB1 (RCLK)
-
-
-
-	ret
+	rjmp main
 
 findValue:
 	ldi tens, 0x00 ; quotient
-	mov ones, r20  ; remainder
+	mov ones, value  ; remainder
 	div: 
-		inc r17
-		subi r16, 10
+		inc tens
+		subi ones, 10
 		brcc div ; branch if carry is 0 
 	dec tens ; correct remainder  
 	ldi r18, 10 
@@ -106,7 +104,6 @@ findValue:
 	ret
 	 
 .equ count = 0x00AA ; assign a 16-bit value to symbol 
-
 delay:
 	ldi r30, low(count)   ; r31:r30  <-- load a 16-bit value into 
 	ldi r31, high(count);
@@ -150,50 +147,37 @@ lookup:
 	breq equal8
 	cpi temp, 0x09
 	breq equal9
-ret
 
 equal0: 
 	ldi R16, digit_0
-	rcall display
-	rjmp main
+	ret
 equal1: 
 	ldi R16, digit_1
-	rcall display
-	rjmp main 
+	ret
 equal2: 
 	ldi R16, digit_2
-	rcall display
-	rjmp main
+	ret
 equal3: 
 	ldi R16, digit_3
-	rcall display
-	rjmp main
+	ret
 equal4: 
 	ldi R16, digit_4
-	rcall display
-	rjmp main
+	ret
 equal5: 
 	ldi R16, digit_5
-	rcall display
-	rjmp main
+	ret
 equal6: 
 	ldi R16, digit_6
-	rcall display
-	rjmp main
+	ret
 equal7: 
 	ldi R16, digit_7
-	rcall display
-	rjmp main
+	ret
 equal8: 
 	ldi R16, digit_8
-	rcall display
-	rjmp main
+	ret
 equal9: 
 	ldi R16, digit_9
-	rcall display
-	rjmp main
-
-
+	ret
 
 
 ; Subroutine to display a digit on the seven-segment display
@@ -205,6 +189,8 @@ display:
 	in R17, SREG
 	push R17
 	ldi R17, 8 ; loop --> test all 8 bits
+	nop
+	nop
 loop:
 	rol R16 ; rotate left through Carry
 	BRCS set_ser_in_1 ; branch if Carry is set
@@ -215,10 +201,13 @@ loop:
 	rjmp end
 	set_ser_in_1:
 		sbi PORTB, PB0 ; set PB0 (SER)
+		nop
 
 end:
 	sbi PORTB, PB2 ; set PB2 (SRCLK)
+	nop
 	cbi PORTB, PB2 ; clear PB2 (SRCLK)
+	nop
 
 	dec R17
 	brne loop
@@ -227,4 +216,8 @@ end:
 	out SREG, R17
 	pop R17
 	pop R16
+	cbi PORTB, PB0 ; clear pb0, ser
+	nop
+
+	nop
 	ret

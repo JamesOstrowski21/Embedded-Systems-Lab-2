@@ -22,31 +22,32 @@
   <FILE>Embedded Systems Lab 2.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <reset><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>36</LINE></reset>
-  <display><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>193</LINE></display>
-  <main><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>44</LINE></main>
-  <rightbuttonpressed><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>54</LINE></rightbuttonpressed>
-  <delay><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>102</LINE></delay>
-  <buttonReleased><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>68</LINE></buttonReleased>
-  <findValue><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>88</LINE></findValue>
-  <displayTens><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>72</LINE></displayTens>
-  <lookup><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>124</LINE></lookup>
-  <displayOnes><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>76</LINE></displayOnes>
-  <div><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>91</LINE></div>
-  <d1><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>105</LINE></d1>
-  <d2><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>107</LINE></d2>
-  <equal0><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>147</LINE></equal0>
-  <equal1><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>151</LINE></equal1>
-  <equal2><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>155</LINE></equal2>
-  <equal3><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>159</LINE></equal3>
+  <reset><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>37</LINE></reset>
+  <display><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>185</LINE></display>
+  <main><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>45</LINE></main>
+  <rightbuttonpressed><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>57</LINE></rightbuttonpressed>
+  <delay><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>107</LINE></delay>
+  <buttonReleased><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>64</LINE></buttonReleased>
+  <displayOne><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>80</LINE></displayOne>
+  <findValue><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>94</LINE></findValue>
+  <displayDouble><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>71</LINE></displayDouble>
+  <lookup><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>129</LINE></lookup>
+  <displayDone><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>88</LINE></displayDone>
+  <div><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>97</LINE></div>
+  <d1><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>110</LINE></d1>
+  <d2><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>112</LINE></d2>
+  <equal0><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>151</LINE></equal0>
+  <equal1><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>154</LINE></equal1>
+  <equal2><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>157</LINE></equal2>
+  <equal3><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>160</LINE></equal3>
   <equal4><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>163</LINE></equal4>
-  <equal5><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>167</LINE></equal5>
-  <equal6><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>171</LINE></equal6>
-  <equal7><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>175</LINE></equal7>
-  <equal8><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>179</LINE></equal8>
-  <equal9><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>183</LINE></equal9>
-  <loop><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>200</LINE></loop>
-  <set_ser_in_1><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>208</LINE></set_ser_in_1>
-  <end><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>211</LINE></end>
+  <equal5><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>166</LINE></equal5>
+  <equal6><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>169</LINE></equal6>
+  <equal7><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>172</LINE></equal7>
+  <equal8><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>175</LINE></equal8>
+  <equal9><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>178</LINE></equal9>
+  <loop><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>194</LINE></loop>
+  <set_ser_in_1><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>202</LINE></set_ser_in_1>
+  <end><FILE>C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm</FILE><LINE>206</LINE></end>
  </LABELS>
 </ASSEMBLER_INFO>

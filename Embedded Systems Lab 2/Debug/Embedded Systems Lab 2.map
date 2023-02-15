@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm Tue Feb 14 13:06:29 2023
+AVRASM ver. 2.2.8  C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm Tue Feb 14 21:51:42 2023
 
 
 EQU  SIGNATURE_000 0000001e
@@ -707,33 +707,34 @@ EQU  digit_7      00000007
 EQU  digit_8      0000007f
 EQU  digit_9      0000006f
 DEF  value        r20
-DEF  tens         r21
-DEF  ones         r22
+DEF  tens         r24
+DEF  ones         r25
 DEF  temp         r18
-CSEG reset        00000005
-CSEG display      00000067
-CSEG main         0000000a
-CSEG rightbuttonpressed 0000000e
-CSEG delay        0000002b
-CSEG buttonReleased 00000017
-CSEG findValue    00000022
-CSEG displayTens  00000019
-CSEG lookup       00000034
-CSEG displayOnes  0000001c
-CSEG div          00000024
+CSEG reset        00000007
+CSEG display      0000006b
+CSEG main         0000000d
+CSEG rightbuttonpressed 00000013
+CSEG delay        0000003a
+CSEG buttonReleased 00000018
+CSEG displayOne   00000027
+CSEG findValue    00000031
+CSEG displayDouble 0000001e
+CSEG lookup       00000043
+CSEG displayDone  0000002e
+CSEG div          00000033
 EQU  count        000000aa
-CSEG d1           0000002d
-CSEG d2           0000002e
-CSEG equal0       00000049
-CSEG equal1       0000004c
-CSEG equal2       0000004f
-CSEG equal3       00000052
-CSEG equal4       00000055
-CSEG equal5       00000058
-CSEG equal6       0000005b
-CSEG equal7       0000005e
-CSEG equal8       00000061
-CSEG equal9       00000064
-CSEG loop         0000006c
-CSEG set_ser_in_1 00000070
-CSEG end          00000071
+CSEG d1           0000003c
+CSEG d2           0000003d
+CSEG equal0       00000057
+CSEG equal1       00000059
+CSEG equal2       0000005b
+CSEG equal3       0000005d
+CSEG equal4       0000005f
+CSEG equal5       00000061
+CSEG equal6       00000063
+CSEG equal7       00000065
+CSEG equal8       00000067
+CSEG equal9       00000069
+CSEG loop         00000072
+CSEG set_ser_in_1 00000076
+CSEG end          00000078
