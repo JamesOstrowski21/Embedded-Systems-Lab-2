@@ -41,6 +41,7 @@ reset:
 	clr value
 	ldi r16, digit_0
 	rcall display
+	rcall delay
 	rcall display
 	; Put code here to generate RCLK pulse
 	sbi PORTB, PB1 ; set PB1 (RCLK)
@@ -60,14 +61,6 @@ main:
 	rjmp rightbuttonpressed
 	rjmp main ; if push button is not pressed, wait
 
-resetCounter: 
-	rcall delay 
-	rcall delay
-	rcall delay 
-	inc r28 
-	cpi r28, 29
-	breq reset
-	rjmp checkReset
 
 countDown: 
 	rcall delay
@@ -86,7 +79,7 @@ countDown:
 	clr r28
 	dec value 
 	cpi value, 0
-	breq reset
+	breq countdownEnd
 	cpi value, 9
 	brlt displaycountdownOne
 	displaycountdownDouble:
@@ -114,6 +107,12 @@ countDown:
 	brne start 
 	rjmp countdownEnd
 
+resetchecksum:
+	in R17, PINB
+	sbrc R17, PB3
+	rjmp reset
+	rjmp resetchecksum
+
 ; Debounce push button
 ; TODO: etermine how long the button has been pressed to trigger a reset
 rightbuttonpressed:
@@ -122,12 +121,25 @@ rightbuttonpressed:
 		in R17, PINB
 		sbrs R17, PB3
 		rjmp resetCounter	
+	clr R28
 	cpi value, 25 ; if the value is equal to 25, branch back to main as thats the max number we allow
 	breq main
 	ldi r28, 0x00
 	sbrc R17, PB3
 	rjmp buttonReleased
 	rjmp reset
+
+
+resetCounter: 
+	rcall delay 
+	rcall delay
+	rcall delay 
+	inc r28 
+	cpi R28, 29
+	breq resetchecksum
+	rjmp checkReset
+
+
 
 countdownEnd: 
 	ldi r28, 0
