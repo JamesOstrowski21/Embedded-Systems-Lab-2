@@ -17,7 +17,7 @@
 .equ digit_7 = 0x07 ; pattern to display digit 7
 .equ digit_8 = 0x7F ; pattern to display digit 8
 .equ digit_9 = 0x6F ; pattern to display digit 9
-
+.equ dash = 0x40
 .def value = r20 
 .def tens = r24
 .def ones = r25
@@ -26,6 +26,7 @@
 
 ; Set push button (PB3) as input
 ; Set SER (PB0), RCLK (PB1), and SRCLK (PB2) as outputs
+cbi PORTB, PB3
 cbi PORTB, PB4
 nop
 ldi r16, 0
@@ -35,40 +36,129 @@ nop
 ldi value, 0x00
 ; Main loop
 reset: 
+	clr r28
+	clr r26 
+	clr value
 	ldi r16, digit_0
 	rcall display
 	rcall display
-			; Put code here to generate RCLK pulse
+	; Put code here to generate RCLK pulse
 	sbi PORTB, PB1 ; set PB1 (RCLK)
 	cbi PORTB, PB1 ; clear PB1 (RCLK)
 	nop
+	in r17, PINB
+	sbrs R17, PB3
+	rjmp reset
 main:
 	; Read push button state
 	nop
 	nop
 	in R17, PINB
-	sbrs R17, PB4 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
+	sbrs R17, PB4
+	rjmp countdown
+	sbrs R17, PB3 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
 	rjmp rightbuttonpressed
 	rjmp main ; if push button is not pressed, wait
 
+resetCounter: 
+	rcall delay 
+	rcall delay
+	rcall delay 
+	inc r28 
+	cpi r28, 29
+	breq reset
+	rjmp checkReset
+
+countDown: 
+	rcall delay
+	in R17, PINB
+	sbrs R17, PB4
+	rjmp countDown ; if the button was not cleared 
+	cpi value, 0
+	breq countdownEnd
+	start: 
+		rcall delay 
+		rcall delay 
+		rcall delay 
+		inc r28 
+		cpi r28, 29
+		brne start
+	clr r28
+	dec value 
+	cpi value, 0
+	breq reset
+	cpi value, 9
+	brlt displaycountdownOne
+	displaycountdownDouble:
+		rcall findValue ; find the tens and ones place
+		mov temp, tens
+		rcall lookup
+		rcall display
+		nop
+		mov temp, ones
+		call lookup
+		rcall display
+		rjmp displaycountdownDone
+	displaycountdownOne:
+		ldi temp, 0
+		nop
+		rcall lookup
+		rcall display
+		mov temp, value
+		rcall lookup
+		rcall display
+	displaycountdownDone: 
+		sbi PORTB, PB1 ; set PB1 (RCLK)
+		cbi PORTB, PB1 ; clear PB1 (RCLK)
+	cpi value, 0 
+	brne start 
+	rjmp countdownEnd
 
 ; Debounce push button
 ; TODO: etermine how long the button has been pressed to trigger a reset
 rightbuttonpressed:
 	rcall delay
-	in R17, PINB
-	sbrc R17, 4
+	checkReset: 
+		in R17, PINB
+		sbrs R17, PB3
+		rjmp resetCounter	
+	cpi value, 25 ; if the value is equal to 25, branch back to main as thats the max number we allow
+	breq main
+	ldi r28, 0x00
+	sbrc R17, PB3
 	rjmp buttonReleased
+	rjmp reset
+
+countdownEnd: 
+	ldi r28, 0
+	ldi r26, 0 
+	blinkSeconds: 
+		rcall delay 
+		rcall delay 
+		rcall delay 
+		inc r28 
+		cpi r28, 14
+		brne blinkSeconds
+	clr r28
+	ldi ones, dash
+	mov r16, ones
+	rcall display
+	rcall display
+	sbi PORTB, PB1 ; set PB1 (RCLK)
+	cbi PORTB, PB1 ; clear PB1 (RCLK)
+	inc r26
+	cpi r26, 8
+	brne blinkSeconds 
 	rjmp main
-	
 buttonReleased:
 	inc value 
 	nop
 	rcall delay
+	checkDisplay: 
 	cpi value, 10
 	brlt displayOne
-	rcall findValue ; find the tens and ones place
-	displayDouble: 
+	displayDouble:
+		rcall findValue ; find the tens and ones place
 		mov temp, tens
 		rcall lookup
 		rcall display
@@ -86,9 +176,8 @@ buttonReleased:
 		rcall lookup
 		rcall display
 	displayDone: 
-			; Put code here to generate RCLK pulse
-	sbi PORTB, PB1 ; set PB1 (RCLK)
-	cbi PORTB, PB1 ; clear PB1 (RCLK)
+		sbi PORTB, PB1 ; set PB1 (RCLK)
+		cbi PORTB, PB1 ; clear PB1 (RCLK)
 	rjmp main
 
 findValue:
@@ -197,7 +286,7 @@ loop:
 
 	; Put code here to set SER to 0
 	cbi PORTB, PB0 ; clear PB0 (SER)
-
+	nop
 	rjmp end
 	set_ser_in_1:
 		sbi PORTB, PB0 ; set PB0 (SER)
@@ -217,7 +306,5 @@ end:
 	pop R17
 	pop R16
 	cbi PORTB, PB0 ; clear pb0, ser
-	nop
-
 	nop
 	ret
