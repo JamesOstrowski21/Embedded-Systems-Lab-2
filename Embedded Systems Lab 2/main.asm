@@ -40,12 +40,17 @@ reset:
 	clr r26 
 	clr value
 	ldi r16, digit_0
+	nop
 	rcall display
-	rcall delay
+	nop
+	nop
+	nop
 	rcall display
 	; Put code here to generate RCLK pulse
 	sbi PORTB, PB1 ; set PB1 (RCLK)
+	nop
 	cbi PORTB, PB1 ; clear PB1 (RCLK)
+	nop
 	nop
 	in r17, PINB
 	sbrs R17, PB3
@@ -55,6 +60,7 @@ main:
 	nop
 	nop
 	in R17, PINB
+	rcall delay
 	sbrs R17, PB4
 	rjmp countdown
 	sbrs R17, PB3 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
@@ -64,7 +70,9 @@ main:
 
 countDown: 
 	rcall delay
+
 	in R17, PINB
+	nop
 	sbrs R17, PB4
 	rjmp countDown ; if the button was not cleared 
 	cpi value, 0
@@ -101,8 +109,11 @@ countDown:
 		rcall lookup
 		rcall display
 	displaycountdownDone: 
+	nop
 		sbi PORTB, PB1 ; set PB1 (RCLK)
+		nop
 		cbi PORTB, PB1 ; clear PB1 (RCLK)
+		nop
 	cpi value, 0 
 	brne start 
 	rjmp countdownEnd
@@ -142,26 +153,49 @@ resetCounter:
 
 
 countdownEnd: 
-	ldi r28, 0
-	ldi r26, 0 
-	blinkSeconds: 
+	clr r28
+	clr r26  
+	coundownEndStart: ; starts the blinking with nothin gin the display
+		clr r25
+		ldi r16, 0b00000000  ; load nothing into display. ie off. 
+		rcall display
+		rcall delay
+		rcall display
+		nop
+		nop
+		sbi PORTB, PB1 ; set PB1 (RCLK)
+		nop
+		cbi PORTB, PB1 ; clear PB1 (RCLK)
+		nop
+	halfSecond: 
 		rcall delay 
 		rcall delay 
 		rcall delay 
 		inc r28 
 		cpi r28, 14
-		brne blinkSeconds
+		brne halfSecond
 	clr r28
-	ldi ones, dash
-	mov r16, ones
+	inc r26
+	; after half a second display a dash 
+	inc r25
+	cpi r25, 2  ; if two half seconds have been completed start a new second cycle
+	breq coundownEndStart
+	
+	ldi r16, dash
+	nop
 	rcall display
+	nop
 	rcall display
 	sbi PORTB, PB1 ; set PB1 (RCLK)
+	nop
 	cbi PORTB, PB1 ; clear PB1 (RCLK)
-	inc r26
-	cpi r26, 8
-	brne blinkSeconds 
-	rjmp main
+	nop
+
+	cpi r26, 8 
+	brge countdownDone
+	rjmp halfSecond  ; once the dash is display run another half second
+	countdownDone: 
+		rcall reset
 buttonReleased:
 	inc value 
 	nop
@@ -189,7 +223,9 @@ buttonReleased:
 		rcall display
 	displayDone: 
 		sbi PORTB, PB1 ; set PB1 (RCLK)
+		nop
 		cbi PORTB, PB1 ; clear PB1 (RCLK)
+		nop
 	rjmp main
 
 findValue:

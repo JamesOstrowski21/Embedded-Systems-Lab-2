@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Users\james\OneDrive\Documents\GitHub\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm Wed Feb 15 13:31:15 2023
+AVRASM ver. 2.2.8  C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm Mon Feb 20 11:08:39 2023
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
-C:\Users\james\OneDrive\Documents\GitHub\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
+C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
-C:\Users\james\OneDrive\Documents\GitHub\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
+C:\Users\kaili\OneDrive\Documents\Spring2023\Embedded\Embedded-Systems-Lab-2\Embedded Systems Lab 2\main.asm(7): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
                                  
                                  ;
                                  
@@ -1071,183 +1071,219 @@ C:\Users\james\OneDrive\Documents\GitHub\Embedded-Systems-Lab-2\Embedded Systems
 000009 27aa                      	clr r26 
 00000a 2744                      	clr value
 00000b e30f                      	ldi r16, digit_0
-00000c d0b4                      	rcall display
-00000d d082                      	rcall delay
-00000e d0b2                      	rcall display
+00000c 0000                      	nop
+00000d d0d1                      	rcall display
+00000e 0000                      	nop
+00000f 0000                      	nop
+000010 0000                      	nop
+000011 d0cd                      	rcall display
                                  	; Put code here to generate RCLK pulse
-00000f 9a29                      	sbi PORTB, PB1 ; set PB1 (RCLK)
-000010 9829                      	cbi PORTB, PB1 ; clear PB1 (RCLK)
-000011 0000                      	nop
-000012 b113                      	in r17, PINB
-000013 ff13                      	sbrs R17, PB3
-000014 cff3                      	rjmp reset
-                                 main:
-                                 	; Read push button state
+000012 9a29                      	sbi PORTB, PB1 ; set PB1 (RCLK)
+000013 0000                      	nop
+000014 9829                      	cbi PORTB, PB1 ; clear PB1 (RCLK)
 000015 0000                      	nop
 000016 0000                      	nop
-000017 b113                      	in R17, PINB
-000018 ff14                      	sbrs R17, PB4
-000019 c003                      	rjmp countdown
-00001a ff13                      	sbrs R17, PB3 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
-00001b c02d                      	rjmp rightbuttonpressed
-00001c cff8                      	rjmp main ; if push button is not pressed, wait
+000017 b113                      	in r17, PINB
+000018 ff13                      	sbrs R17, PB3
+000019 cfee                      	rjmp reset
+                                 main:
+                                 	; Read push button state
+00001a 0000                      	nop
+00001b 0000                      	nop
+00001c b113                      	in R17, PINB
+00001d d090                      	rcall delay
+00001e ff14                      	sbrs R17, PB4
+00001f c003                      	rjmp countdown
+000020 ff13                      	sbrs R17, PB3 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
+000021 c031                      	rjmp rightbuttonpressed
+000022 cff7                      	rjmp main ; if push button is not pressed, wait
                                  
                                  
                                  countDown: 
-00001d d072                      	rcall delay
-00001e b113                      	in R17, PINB
-00001f ff14                      	sbrs R17, PB4
-000020 cffc                      	rjmp countDown ; if the button was not cleared 
-000021 3040                      	cpi value, 0
-000022 f1c1                      	breq countdownEnd
+000023 d08a                      	rcall delay
+                                 
+000024 b113                      	in R17, PINB
+000025 0000                      	nop
+000026 ff14                      	sbrs R17, PB4
+000027 cffb                      	rjmp countDown ; if the button was not cleared 
+000028 3040                      	cpi value, 0
+000029 f1d9                      	breq countdownEnd
                                  	start: 
-000023 d06c                      		rcall delay 
-000024 d06b                      		rcall delay 
-000025 d06a                      		rcall delay 
-000026 95c3                      		inc r28 
-000027 31cd                      		cpi r28, 29
-000028 f7d1                      		brne start
-000029 27cc                      	clr r28
-00002a 954a                      	dec value 
-00002b 3040                      	cpi value, 0
-00002c f171                      	breq countdownEnd
-00002d 3049                      	cpi value, 9
-00002e f054                      	brlt displaycountdownOne
+00002a d083                      		rcall delay 
+00002b d082                      		rcall delay 
+00002c d081                      		rcall delay 
+00002d 95c3                      		inc r28 
+00002e 31cd                      		cpi r28, 29
+00002f f7d1                      		brne start
+000030 27cc                      	clr r28
+000031 954a                      	dec value 
+000032 3040                      	cpi value, 0
+000033 f189                      	breq countdownEnd
+000034 3049                      	cpi value, 9
+000035 f054                      	brlt displaycountdownOne
                                  	displaycountdownDouble:
-00002f d057                      		rcall findValue ; find the tens and ones place
-000030 2f28                      		mov temp, tens
-000031 d067                      		rcall lookup
-000032 d08e                      		rcall display
-000033 0000                      		nop
-000034 2f29                      		mov temp, ones
-000035 940e 0099                 		call lookup
-000037 d089                      		rcall display
-000038 c007                      		rjmp displaycountdownDone
-                                 	displaycountdownOne:
-000039 e020                      		ldi temp, 0
+000036 d06e                      		rcall findValue ; find the tens and ones place
+000037 2f28                      		mov temp, tens
+000038 d07e                      		rcall lookup
+000039 d0a5                      		rcall display
 00003a 0000                      		nop
-00003b d05d                      		rcall lookup
-00003c d084                      		rcall display
-00003d 2f24                      		mov temp, value
-00003e d05a                      		rcall lookup
-00003f d081                      		rcall display
+00003b 2f29                      		mov temp, ones
+00003c 940e 00b7                 		call lookup
+00003e d0a0                      		rcall display
+00003f c007                      		rjmp displaycountdownDone
+                                 	displaycountdownOne:
+000040 e020                      		ldi temp, 0
+000041 0000                      		nop
+000042 d074                      		rcall lookup
+000043 d09b                      		rcall display
+000044 2f24                      		mov temp, value
+000045 d071                      		rcall lookup
+000046 d098                      		rcall display
                                  	displaycountdownDone: 
-000040 9a29                      		sbi PORTB, PB1 ; set PB1 (RCLK)
-000041 9829                      		cbi PORTB, PB1 ; clear PB1 (RCLK)
-000042 3040                      	cpi value, 0 
-000043 f6f9                      	brne start 
-000044 c016                      	rjmp countdownEnd
+000047 0000                      	nop
+000048 9a29                      		sbi PORTB, PB1 ; set PB1 (RCLK)
+000049 0000                      		nop
+00004a 9829                      		cbi PORTB, PB1 ; clear PB1 (RCLK)
+00004b 0000                      		nop
+00004c 3040                      	cpi value, 0 
+00004d f6e1                      	brne start 
+00004e c016                      	rjmp countdownEnd
                                  
                                  resetchecksum:
-000045 b113                      	in R17, PINB
-000046 fd13                      	sbrc R17, PB3
-000047 cfc0                      	rjmp reset
-000048 cffc                      	rjmp resetchecksum
+00004f b113                      	in R17, PINB
+000050 fd13                      	sbrc R17, PB3
+000051 cfb6                      	rjmp reset
+000052 cffc                      	rjmp resetchecksum
                                  
                                  ; Debounce push button
                                  ; TODO: etermine how long the button has been pressed to trigger a reset
                                  rightbuttonpressed:
-000049 d046                      	rcall delay
+000053 d05a                      	rcall delay
                                  	checkReset: 
-00004a b113                      		in R17, PINB
-00004b ff13                      		sbrs R17, PB3
-00004c c007                      		rjmp resetCounter	
-00004d 27cc                      	clr R28
-00004e 3149                      	cpi value, 25 ; if the value is equal to 25, branch back to main as thats the max number we allow
-00004f f229                      	breq main
-000050 e0c0                      	ldi r28, 0x00
-000051 fd13                      	sbrc R17, PB3
-000052 c01b                      	rjmp buttonReleased
-000053 cfb4                      	rjmp reset
+000054 b113                      		in R17, PINB
+000055 ff13                      		sbrs R17, PB3
+000056 c007                      		rjmp resetCounter	
+000057 27cc                      	clr R28
+000058 3149                      	cpi value, 25 ; if the value is equal to 25, branch back to main as thats the max number we allow
+000059 f201                      	breq main
+00005a e0c0                      	ldi r28, 0x00
+00005b fd13                      	sbrc R17, PB3
+00005c c02d                      	rjmp buttonReleased
+00005d cfaa                      	rjmp reset
                                  
                                  
                                  resetCounter: 
-000054 d03b                      	rcall delay 
-000055 d03a                      	rcall delay
-000056 d039                      	rcall delay 
-000057 95c3                      	inc r28 
-000058 31cd                      	cpi R28, 29
-000059 f359                      	breq resetchecksum
-00005a cfef                      	rjmp checkReset
+00005e d04f                      	rcall delay 
+00005f d04e                      	rcall delay
+000060 d04d                      	rcall delay 
+000061 95c3                      	inc r28 
+000062 31cd                      	cpi R28, 29
+000063 f359                      	breq resetchecksum
+000064 cfef                      	rjmp checkReset
                                  
                                  
                                  
                                  countdownEnd: 
-00005b e0c0                      	ldi r28, 0
-00005c e0a0                      	ldi r26, 0 
-                                 	blinkSeconds: 
-00005d d032                      		rcall delay 
-00005e d031                      		rcall delay 
-00005f d030                      		rcall delay 
-000060 95c3                      		inc r28 
-000061 30ce                      		cpi r28, 14
-000062 f7d1                      		brne blinkSeconds
-000063 27cc                      	clr r28
-000064 e490                      	ldi ones, dash
-000065 2f09                      	mov r16, ones
-000066 d05a                      	rcall display
-000067 d059                      	rcall display
-000068 9a29                      	sbi PORTB, PB1 ; set PB1 (RCLK)
-000069 9829                      	cbi PORTB, PB1 ; clear PB1 (RCLK)
-00006a 95a3                      	inc r26
-00006b 30a8                      	cpi r26, 8
-00006c f781                      	brne blinkSeconds 
-00006d cfa7                      	rjmp main
+000065 27cc                      	clr r28
+000066 27aa                      	clr r26  
+                                 	coundownEndStart: ; starts the blinking with nothin gin the display
+000067 2799                      		clr r25
+000068 e000                      		ldi r16, 0b00000000  ; load nothing into display. ie off. 
+000069 d075                      		rcall display
+00006a d043                      		rcall delay
+00006b d073                      		rcall display
+00006c 0000                      		nop
+00006d 0000                      		nop
+00006e 9a29                      		sbi PORTB, PB1 ; set PB1 (RCLK)
+00006f 0000                      		nop
+000070 9829                      		cbi PORTB, PB1 ; clear PB1 (RCLK)
+000071 0000                      		nop
+                                 	halfSecond: 
+000072 d03b                      		rcall delay 
+000073 d03a                      		rcall delay 
+000074 d039                      		rcall delay 
+000075 95c3                      		inc r28 
+000076 30ce                      		cpi r28, 14
+000077 f7d1                      		brne halfSecond
+000078 27cc                      	clr r28
+000079 95a3                      	inc r26
+                                 	; after half a second display a dash 
+00007a 9593                      	inc r25
+00007b 3092                      	cpi r25, 2  ; if two half seconds have been completed start a new second cycle
+00007c f351                      	breq coundownEndStart
+                                 	
+00007d e400                      	ldi r16, dash
+00007e 0000                      	nop
+00007f d05f                      	rcall display
+000080 0000                      	nop
+000081 d05d                      	rcall display
+000082 9a29                      	sbi PORTB, PB1 ; set PB1 (RCLK)
+000083 0000                      	nop
+000084 9829                      	cbi PORTB, PB1 ; clear PB1 (RCLK)
+000085 0000                      	nop
+                                 
+000086 30a8                      	cpi r26, 8 
+000087 f40c                      	brge countdownDone
+000088 cfe9                      	rjmp halfSecond  ; once the dash is display run another half second
+                                 	countdownDone: 
+000089 df7e                      		rcall reset
                                  buttonReleased:
-00006e 9543                      	inc value 
-00006f 0000                      	nop
-000070 d01f                      	rcall delay
+00008a 9543                      	inc value 
+00008b 0000                      	nop
+00008c d021                      	rcall delay
                                  	checkDisplay: 
-000071 304a                      	cpi value, 10
-000072 f054                      	brlt displayOne
+00008d 304a                      	cpi value, 10
+00008e f054                      	brlt displayOne
                                  	displayDouble:
-000073 d013                      		rcall findValue ; find the tens and ones place
-000074 2f28                      		mov temp, tens
-000075 d023                      		rcall lookup
-000076 d04a                      		rcall display
-000077 0000                      		nop
-000078 2f29                      		mov temp, ones
-000079 940e 0099                 		call lookup
-00007b d045                      		rcall display
-00007c c007                      		rjmp displayDone
+00008f d015                      		rcall findValue ; find the tens and ones place
+000090 2f28                      		mov temp, tens
+000091 d025                      		rcall lookup
+000092 d04c                      		rcall display
+000093 0000                      		nop
+000094 2f29                      		mov temp, ones
+000095 940e 00b7                 		call lookup
+000097 d047                      		rcall display
+000098 c007                      		rjmp displayDone
                                  	displayOne:
-00007d e020                      		ldi temp, 0
-00007e 0000                      		nop
-00007f d019                      		rcall lookup
-000080 d040                      		rcall display
-000081 2f24                      		mov temp, value
-000082 d016                      		rcall lookup
-000083 d03d                      		rcall display
+000099 e020                      		ldi temp, 0
+00009a 0000                      		nop
+00009b d01b                      		rcall lookup
+00009c d042                      		rcall display
+00009d 2f24                      		mov temp, value
+00009e d018                      		rcall lookup
+00009f d03f                      		rcall display
                                  	displayDone: 
-000084 9a29                      		sbi PORTB, PB1 ; set PB1 (RCLK)
-000085 9829                      		cbi PORTB, PB1 ; clear PB1 (RCLK)
-000086 cf8e                      	rjmp main
+0000a0 9a29                      		sbi PORTB, PB1 ; set PB1 (RCLK)
+0000a1 0000                      		nop
+0000a2 9829                      		cbi PORTB, PB1 ; clear PB1 (RCLK)
+0000a3 0000                      		nop
+0000a4 cf75                      	rjmp main
                                  
                                  findValue:
-000087 e080                      	ldi tens, 0x00 ; quotient
-000088 2f94                      	mov ones, value  ; remainder
+0000a5 e080                      	ldi tens, 0x00 ; quotient
+0000a6 2f94                      	mov ones, value  ; remainder
                                  	div: 
-000089 9583                      		inc tens
-00008a 509a                      		subi ones, 10
-00008b f7e8                      		brcc div ; branch if carry is 0 
-00008c 958a                      	dec tens ; correct remainder  
-00008d e02a                      	ldi r18, 10 
-00008e 0f92                      	add ones, r18 ; correct remainder
-00008f 9508                      	ret
+0000a7 9583                      		inc tens
+0000a8 509a                      		subi ones, 10
+0000a9 f7e8                      		brcc div ; branch if carry is 0 
+0000aa 958a                      	dec tens ; correct remainder  
+0000ab e02a                      	ldi r18, 10 
+0000ac 0f92                      	add ones, r18 ; correct remainder
+0000ad 9508                      	ret
                                  	 
                                  .equ count = 0x00AA ; assign a 16-bit value to symbol 
                                  delay:
-000090 eaea                      	ldi r30, low(count)   ; r31:r30  <-- load a 16-bit value into 
-000091 e0f0                      	ldi r31, high(count);
+0000ae eaea                      	ldi r30, low(count)   ; r31:r30  <-- load a 16-bit value into 
+0000af e0f0                      	ldi r31, high(count);
                                  	d1:
-000092 efdf                      		ldi   r29, 0xff     ; r29 <-- load a 8-bit value into counter register for inner loop
+0000b0 efdf                      		ldi   r29, 0xff     ; r29 <-- load a 8-bit value into counter register for inner loop
                                  	d2:
-000093 0000                      		nop ; no operation
-000094 95da                      		dec   r29            ; r29 <-- r29 - 1
-000095 f7e9                      		brne  d2 ; branch to d2 if result is not "0"
-000096 9731                      		sbiw r31:r30, 1 ; r31:r30 <-- r31:r30 - 1
-000097 f7d1                      		brne d1 ; branch to d1 if result is not "0"
-000098 9508                      	ret 
+0000b1 0000                      		nop ; no operation
+0000b2 95da                      		dec   r29            ; r29 <-- r29 - 1
+0000b3 f7e9                      		brne  d2 ; branch to d2 if result is not "0"
+0000b4 9731                      		sbiw r31:r30, 1 ; r31:r30 <-- r31:r30 - 1
+0000b5 f7d1                      		brne d1 ; branch to d1 if result is not "0"
+0000b6 9508                      	ret 
                                  
                                  
                                  ; Read push button state again to check if it is still pressed
@@ -1259,98 +1295,98 @@ C:\Users\james\OneDrive\Documents\GitHub\Embedded-Systems-Lab-2\Embedded Systems
                                  
                                  ; Increment display value
                                  lookup:
-000099 3020                      	cpi temp, 0x00
-00009a f091                      	breq equal0
-00009b 3021                      	cpi temp, 0x01
-00009c f091                      	breq equal1
-00009d 3022                      	cpi temp, 0x02
-00009e f091                      	breq equal2
-00009f 3023                      	cpi temp, 0x03
-0000a0 f091                      	breq equal3
-0000a1 3024                      	cpi temp, 0x04
-0000a2 f091                      	breq equal4
-0000a3 3025                      	cpi temp, 0x05
-0000a4 f091                      	breq equal5
-0000a5 3026                      	cpi temp, 0x06
-0000a6 f091                      	breq equal6
-0000a7 3027                      	cpi temp, 0x07
-0000a8 f091                      	breq equal7
-0000a9 3028                      	cpi temp, 0x08
-0000aa f091                      	breq equal8
-0000ab 3029                      	cpi temp, 0x09
-0000ac f091                      	breq equal9
+0000b7 3020                      	cpi temp, 0x00
+0000b8 f091                      	breq equal0
+0000b9 3021                      	cpi temp, 0x01
+0000ba f091                      	breq equal1
+0000bb 3022                      	cpi temp, 0x02
+0000bc f091                      	breq equal2
+0000bd 3023                      	cpi temp, 0x03
+0000be f091                      	breq equal3
+0000bf 3024                      	cpi temp, 0x04
+0000c0 f091                      	breq equal4
+0000c1 3025                      	cpi temp, 0x05
+0000c2 f091                      	breq equal5
+0000c3 3026                      	cpi temp, 0x06
+0000c4 f091                      	breq equal6
+0000c5 3027                      	cpi temp, 0x07
+0000c6 f091                      	breq equal7
+0000c7 3028                      	cpi temp, 0x08
+0000c8 f091                      	breq equal8
+0000c9 3029                      	cpi temp, 0x09
+0000ca f091                      	breq equal9
                                  
                                  equal0: 
-0000ad e30f                      	ldi R16, digit_0
-0000ae 9508                      	ret
+0000cb e30f                      	ldi R16, digit_0
+0000cc 9508                      	ret
                                  equal1: 
-0000af e006                      	ldi R16, digit_1
-0000b0 9508                      	ret
+0000cd e006                      	ldi R16, digit_1
+0000ce 9508                      	ret
                                  equal2: 
-0000b1 e50b                      	ldi R16, digit_2
-0000b2 9508                      	ret
+0000cf e50b                      	ldi R16, digit_2
+0000d0 9508                      	ret
                                  equal3: 
-0000b3 e40f                      	ldi R16, digit_3
-0000b4 9508                      	ret
+0000d1 e40f                      	ldi R16, digit_3
+0000d2 9508                      	ret
                                  equal4: 
-0000b5 e606                      	ldi R16, digit_4
-0000b6 9508                      	ret
+0000d3 e606                      	ldi R16, digit_4
+0000d4 9508                      	ret
                                  equal5: 
-0000b7 e60d                      	ldi R16, digit_5
-0000b8 9508                      	ret
+0000d5 e60d                      	ldi R16, digit_5
+0000d6 9508                      	ret
                                  equal6: 
-0000b9 e70d                      	ldi R16, digit_6
-0000ba 9508                      	ret
+0000d7 e70d                      	ldi R16, digit_6
+0000d8 9508                      	ret
                                  equal7: 
-0000bb e007                      	ldi R16, digit_7
-0000bc 9508                      	ret
+0000d9 e007                      	ldi R16, digit_7
+0000da 9508                      	ret
                                  equal8: 
-0000bd e70f                      	ldi R16, digit_8
-0000be 9508                      	ret
+0000db e70f                      	ldi R16, digit_8
+0000dc 9508                      	ret
                                  equal9: 
-0000bf e60f                      	ldi R16, digit_9
-0000c0 9508                      	ret
+0000dd e60f                      	ldi R16, digit_9
+0000de 9508                      	ret
                                  
                                  
                                  ; Subroutine to display a digit on the seven-segment display
                                  ; runs two times, first send tens to display, then send ones 
                                  display:
                                  ; Backup used registers on stack
-0000c1 930f                      	push R16
-0000c2 931f                      	push R17
-0000c3 b71f                      	in R17, SREG
-0000c4 931f                      	push R17
-0000c5 e018                      	ldi R17, 8 ; loop --> test all 8 bits
-0000c6 0000                      	nop
-0000c7 0000                      	nop
+0000df 930f                      	push R16
+0000e0 931f                      	push R17
+0000e1 b71f                      	in R17, SREG
+0000e2 931f                      	push R17
+0000e3 e018                      	ldi R17, 8 ; loop --> test all 8 bits
+0000e4 0000                      	nop
+0000e5 0000                      	nop
                                  loop:
-0000c8 1f00                      	rol R16 ; rotate left through Carry
-0000c9 f018                      	BRCS set_ser_in_1 ; branch if Carry is set
+0000e6 1f00                      	rol R16 ; rotate left through Carry
+0000e7 f018                      	BRCS set_ser_in_1 ; branch if Carry is set
                                  
                                  	; Put code here to set SER to 0
-0000ca 9828                      	cbi PORTB, PB0 ; clear PB0 (SER)
-0000cb 0000                      	nop
-0000cc c002                      	rjmp end
+0000e8 9828                      	cbi PORTB, PB0 ; clear PB0 (SER)
+0000e9 0000                      	nop
+0000ea c002                      	rjmp end
                                  	set_ser_in_1:
-0000cd 9a28                      		sbi PORTB, PB0 ; set PB0 (SER)
-0000ce 0000                      		nop
+0000eb 9a28                      		sbi PORTB, PB0 ; set PB0 (SER)
+0000ec 0000                      		nop
                                  
                                  end:
-0000cf 9a2a                      	sbi PORTB, PB2 ; set PB2 (SRCLK)
-0000d0 0000                      	nop
-0000d1 982a                      	cbi PORTB, PB2 ; clear PB2 (SRCLK)
-0000d2 0000                      	nop
+0000ed 9a2a                      	sbi PORTB, PB2 ; set PB2 (SRCLK)
+0000ee 0000                      	nop
+0000ef 982a                      	cbi PORTB, PB2 ; clear PB2 (SRCLK)
+0000f0 0000                      	nop
                                  
-0000d3 951a                      	dec R17
-0000d4 f799                      	brne loop
+0000f1 951a                      	dec R17
+0000f2 f799                      	brne loop
                                  ; Restore registers from stack
-0000d5 911f                      	pop R17
-0000d6 bf1f                      	out SREG, R17
-0000d7 911f                      	pop R17
-0000d8 910f                      	pop R16
-0000d9 9828                      	cbi PORTB, PB0 ; clear pb0, ser
-0000da 0000                      	nop
-0000db 9508                      	ret
+0000f3 911f                      	pop R17
+0000f4 bf1f                      	out SREG, R17
+0000f5 911f                      	pop R17
+0000f6 910f                      	pop R16
+0000f7 9828                      	cbi PORTB, PB0 ; clear pb0, ser
+0000f8 0000                      	nop
+0000f9 9508                      	ret
 
 
 RESOURCE USE INFORMATION
@@ -1370,37 +1406,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  18 r17:  20 r18:  20 r19:   0 r20:  13 
-r21:   0 r22:   0 r23:   0 r24:   5 r25:   7 r26:   4 r27:   0 r28:  12 
+r13:   0 r14:   0 r15:   0 r16:  19 r17:  20 r18:  20 r19:   0 r20:  13 
+r21:   0 r22:   0 r23:   0 r24:   5 r25:   8 r26:   4 r27:   0 r28:  12 
 r29:   2 r30:   2 r31:   2 
 Registers used: 11 out of 35 (31.4%)
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   1 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   1 brcs  :   1 break :   0 breq  :  14 brge  :   0 brhc  :   0 
+brcc  :   1 brcs  :   1 break :   0 breq  :  15 brge  :   1 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   2 brmi  :   0 
-brne  :   7 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   2 cbi   :   9 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   6 cls   :   0 
+brne  :   6 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   2 cbi   :  10 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   9 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :  20 cpse  :   0 dec   :   4 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   6 inc   :   6 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :  26 lds   :   0 lpm   :   0 lsl   :   0 
-lsr   :   0 mov   :   8 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :  18 or    :   0 ori   :   0 out   :   2 pop   :   3 
-push  :   3 rcall :  33 ret   :  13 reti  :   0 rjmp  :  17 rol   :   1 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   6 sbic  :   0 sbis  :   0 
+cpi   :  21 cpse  :   0 dec   :   4 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   6 inc   :   7 jmp   :   0 
+ld    :   0 ldd   :   0 ldi   :  25 lds   :   0 lpm   :   0 lsl   :   0 
+lsr   :   0 mov   :   7 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   0 nop   :  38 or    :   0 ori   :   0 out   :   2 pop   :   3 
+push  :   3 rcall :  37 ret   :  13 reti  :   0 rjmp  :  17 rol   :   1 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   7 sbic  :   0 sbis  :   0 
 sbiw  :   1 sbr   :   0 sbrc  :   2 sbrs  :   5 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
 sub   :   0 subi  :   1 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 28 out of 113 (24.8%)
+Instructions used: 29 out of 113 (25.7%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0001b8    440      0    440   32768   1.3%
+[.cseg] 0x000000 0x0001f4    500      0    500   32768   1.5%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
