@@ -64,7 +64,7 @@ main:
 	sbrs R17, PB4
 	rjmp countdown
 	sbrs R17, PB3 ; check if pb3 is cleared. PB3 is logic low on button press and logic high on button release
-	rjmp rightbuttonpressed
+	rjmp buttonPressed
 	rjmp main ; if push button is not pressed, wait
 
 
@@ -109,7 +109,7 @@ countDown:
 		rcall lookup
 		rcall display
 	displaycountdownDone: 
-	nop
+		nop
 		sbi PORTB, PB1 ; set PB1 (RCLK)
 		nop
 		cbi PORTB, PB1 ; clear PB1 (RCLK)
@@ -126,7 +126,7 @@ resetchecksum:
 
 ; Debounce push button
 ; TODO: etermine how long the button has been pressed to trigger a reset
-rightbuttonpressed:
+buttonPressed:
 	rcall delay
 	checkReset: 
 		in R17, PINB
@@ -228,7 +228,7 @@ buttonReleased:
 		nop
 	rjmp main
 
-findValue:
+findValue:  ; breaks up the value into its tens and ones digits for easier displaying 
 	ldi tens, 0x00 ; quotient
 	mov ones, value  ; remainder
 	div: 
